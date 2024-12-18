@@ -1,6 +1,6 @@
 export default [
     {
-        destination: "Siviglia, Spagna",
+        destination: "Siviglia",
         startDate: "2024-02-21",
         img: "seville.jpg",
         participants: [
@@ -21,7 +21,7 @@ export default [
         ],
     },
     {
-        destination: "Parigi, Francia",
+        destination: "Parigi",
         startDate: "2024-03-15",
         img: "paris.jpg",
         participants: [
@@ -42,9 +42,9 @@ export default [
         ],
     },
     {
-        destination: "Tokyo, Giappone",
+        destination: "Tokyo",
         startDate: "2024-04-10",
-        img: "tokyo.jpg",
+        img: "calle-akihabara-tokio.webp",
         participants: [
             {
                 firstName: "Alessandro",
