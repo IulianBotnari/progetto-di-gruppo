@@ -3,16 +3,33 @@
 import travelDestination from '../db'
 import Header from '../components/Header'
 import { useParams } from 'react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function DetailsPage() {
+    const { id } = useParams()
 
     const [partecipants, setParticipants] = useState('')
+    const [newArray, setnewArray] = useState(travelDestination[id].participants)
+
+    console.log(partecipants);
 
 
-    const { id } = useParams()
+
+    function search() {
+
+        const searchArray = travelDestination[id].participants.filter(participant => `${participant.firstName}${participant.lastName}`.toLocaleLowerCase().includes(partecipants.toLowerCase()))
+        console.log(searchArray);
+        setnewArray(searchArray)
+        return searchArray
+    }
+
+    useEffect(() => {
+        search()
+    }, [partecipants])
+
+
+
     const title = travelDestination[id].destination
-
 
 
 
@@ -20,17 +37,17 @@ export default function DetailsPage() {
         <>
             <Header />
             <h3 className='text-center'>{title}</h3>
-            <input type='text' placeholder='search' onChange={(e) => setParticipants(e.target.value)} />
 
-            <div className='container'>
+            <div className='container d-flex align-items-center flex-column'>
+                <input className='form-control input-group-text my-3 w-50' aria-label="First name" type='text' placeholder='🔍' onChange={(e) => setParticipants(e.target.value)} />
 
-                <div className="accordion accordion-flush" id="accordionFlushExample">
+                <div className="accordion accordion-flush col-6" id="accordionFlushExample">
 
-                    {travelDestination[id].participants.map((participant, index) => (
+                    {newArray.map((participant, index) => (
 
-                        <div key={index} className="accordion-item">
-                            <h2 className="accordion-header">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${index}`} aria-expanded="false" aria-controls={`flush-collapse${index}`}>
+                        <div key={index} className="accordion-item border my-3 rounded-3 ">
+                            <h2 className="accordion-header ">
+                                <button className="accordion-button collapsed rounded-3" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${index}`} aria-expanded="false" aria-controls={`flush-collapse${index}`}>
                                     {participant.firstName} {participant.lastName}
                                 </button>
                             </h2>
